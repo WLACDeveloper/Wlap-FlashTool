@@ -4,7 +4,7 @@ theme = selector.theme
 
 VERSION = '1.0.0.2 CWTRUXM'
 CORE_VERSION = '07122024.COM'
-BRANCH = 'Wlap Pilot'
+BRANCH = 'https://github.com/WLACDeveloper/Wlap-FlashTool'
 WINDOW_SIZE = '960x540'
 WIDTH = 960
 HEIGHT = 540
@@ -64,7 +64,7 @@ RIGHT = f'image/{theme}/right.png'
 WINDOWS_PLATFROM_URL = 'https://dl.google.com/android/repository/platform-tools-latest-windows.zip'
 WINDOWS_PLATFORM_DRIVER = 'https://raw.githubusercontent.com/WALMFAST/walmfast-drivers/refs/heads/main/Driver_Auto_Installer_EXE_v5.1632.00.zip'
 UPDATE = f'image/{theme}/update.png'
-meta_info_update = f'https://raw.githubusercontent.com/WALMFAST/walmfast-updater/refs/heads/{BRANCH}/update.py'
+meta_info_update = f'https://raw.githubusercontent.com/WLACDeveloper/WlapToolUpdate/refs/heads/main/update.py'
 null = f'image/{theme}/null.png'
 NB = 'Версия программы:'
 NC = 'Версия Ядра:'
