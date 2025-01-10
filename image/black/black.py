@@ -1,6 +1,6 @@
 bg = 'white'
 bg1 = '#d1d1d1'
-fg = 'white'
+fg = '#ededed'
 border = 'black'
 text = 'black'
 hover = 'white'
