@@ -212,14 +212,14 @@ def phone_test_state(mode):
     if mode == 'adb':
         if ad_fas_firm.get_devices_adb() == None or ad_fas_firm.get_devices_adb() == False:
             android_phone_status.configure(text=lang.not_found)
-            xdialog.error('WALMFast', f'{lang.platorm_tools_error}')
+            xdialog.error('WlapTools', f'{lang.platorm_tools_error}')
         else:
             android_phone_status.configure(text=ad_fas_firm.get_devices_adb(), font=(winaobj.FONT_NAME, winaobj.FONT_SIZE_STANDART_MEDIUM))
             android_phone_status.place(x=33, y=370)
     if mode == 'fastboot':
         if ad_fas_firm.get_devices_fastboot() == None or ad_fas_firm.get_devices_fastboot() == False:
             android_phone_status.configure(text=lang.not_found, font=(winaobj.FONT_NAME, winaobj.FONT_SIZE_STANDART))
-            xdialog.error('WALMFast', f'{lang.platorm_tools_error}')
+            xdialog.error('WlapTools', f'{lang.platorm_tools_error}')
         else:
             android_phone_status.configure(text=ad_fas_firm.get_devices_fastboot(), font=(winaobj.FONT_NAME, winaobj.FONT_SIZE_STANDART_MEDIUM))
     if android_phone_status._text == lang.not_found:
@@ -238,7 +238,7 @@ def load_phone_vendor():
 
     if platform.system() == 'Linux':
         try:
-            phone_vendor = crossfiledialog.open_file(title='Open phone vendor file for WALMFAST', start_dir=f'{os.getcwd()}/{winaobj.PHONE_VENDOR_PATH}/', filter=["*.py"])
+            phone_vendor = crossfiledialog.open_file(title='Open phone vendor file for WlapFlashTool', start_dir=f'{os.getcwd()}/{winaobj.PHONE_VENDOR_PATH}/', filter=["*.py"])
 
             vendorid = str(os.path.basename(phone_vendor))[:-3]
             vendorvice = importlib.import_module(name=f'.{vendorid}.{vendorid}', package=f'{winaobj.PHONE_VENDOR_PATH}')
@@ -592,7 +592,6 @@ def update():
 
     update_close_button.configure(state='disabled')
     update_yes_button.place_forget()
-    update_no_button.place_forget()
     des.update()
 
     sleep(3)
@@ -604,18 +603,15 @@ def update():
         update_close_button.configure(state='normal')
     elif status_update == 'Update_recommend':
         update_hader.configure(text=lang.update_recommend)
-        update_yes_button.place(x=300, y=300)
-        update_no_button.place(x=500, y=300)
+        update_yes_button.place(x=15, y=480)
     elif status_update == 'Update_required':
         update_hader.configure(text=lang.update_required)
         update_yes_button.place(x=300, y=300)
-        update_no_button.place(x=500, y=300)
     elif status_update == False:
         update_hader.configure(text=lang.unable_update_check)
         update_close_button.configure(state='normal')
 def update_start(status):
     update_yes_button.place_forget()
-    update_no_button.place_forget()
     update_hader.configure(text=lang.update)
     des.update()
 
@@ -802,7 +798,7 @@ test_state_button = CTkButton(base_frame, font=(winaobj.FONT_NAME, winaobj.FONT_
 
 gsi_menu_button = CTkButton(base_frame, font=(winaobj.FONT_NAME, winaobj.FONT_SIZE_SMALL), height=45, text=f'{lang.gsi_boot_enabler}', text_color=text,corner_radius=2, bg_color=bg, fg_color=fg, hover_color=hover, border_color=border, border_width=2, width=186, state='disabled', command=menu_gsi)
 
-menu_button = CTkButton(base_frame, font=(winaobj.FONT_NAME, winaobj.FONT_SIZE_SMALL), text='', width=25, height=25, image=imageload.menu,corner_radius=2, bg_color=bg, fg_color=fg, hover_color=hover, border_color=border, border_width=2, command=menu_firmware)
+menu_button = CTkButton(base_frame, font=(winaobj.FONT_NAME, winaobj.FONT_SIZE_SMALL), text='', width=25, height=25, image=imageload.menu,corner_radius=2, bg_color=bg, fg_color=fg, hover_color=hover, border_color=border, border_width=2, command=menu_about)
 
 firmware_image_frame = CTkScrollableFrame(base_frame, width=255, height=380, bg_color=bg, fg_color=fg, corner_radius=3, border_color=border, border_width=2, scrollbar_button_color=scrollable, scrollbar_button_hover_color=scrollable, scrollbar_fg_color=scrollbar_fg)
 
@@ -820,24 +816,27 @@ flash_all_radiobutton = CTkRadioButton(firmware_image_frame, text=lang.flash_all
 
 firmware_partition_frame = CTkScrollableFrame(firmware_image_frame, bg_color=bg, fg_color=fg, corner_radius=3, border_color=border, border_width=2, scrollbar_button_color=scrollable, scrollbar_button_hover_color=scrollable, scrollbar_fg_color=scrollbar_fg)
 
+selfold = CTkLabel(base_frame, font=(winaobj.FONT_NAME, winaobj.FONT_SIZE_SMALL), text='Выберите папку', text_color=text, justify='center', width=280, bg_color=bg)
+
 background.place(x=1, y=1)
 base_frame.place(x=0,y=0)
 background.place(x=1, y=1)
-frame.place(x=20, y=20)
-android.place(x=30, y=70)
-android_phone_status.place(x=30, y=370)
-phone_vendor_model.place(x=20, y=467)
-select_phone_model_button.place(x=385,y=25)
-test_state_button.place(x=695,y=73)
-gsi_menu_button.place(x=740, y=25)
-menu_button.place(x=695, y=25)
-firmware_image_frame.place(x=385,y=73)
-select_firmware_folder_button.place(x=385,y=470)
-forum_firmwares_forpda_button.place(x=695,y=276)
-phone_reboot_button.place(x=695,y=324)
-flash_phone_button.place(x=695,y=372)
-about_button.place(x=695,y=420)
-exit_button.place(x=695,y=470)
+frame.place(x=320, y=20)
+selfold.place(x=670, y=20)
+android.place(x=330, y=70)
+android_phone_status.place(x=330, y=370)
+phone_vendor_model.place(x=330, y=467)
+select_phone_model_button.place(x=360,y=25)
+test_state_button.place(x=15,y=73)
+gsi_menu_button.place(x=60, y=25)
+menu_button.place(x=15, y=25)
+firmware_image_frame.place(x=680,y=73)
+select_firmware_folder_button.place(x=680,y=470)
+forum_firmwares_forpda_button.place(x=15,y=276)
+phone_reboot_button.place(x=15,y=324)
+flash_phone_button.place(x=15,y=372)
+about_button.place(x=15,y=420)
+exit_button.place(x=15,y=470)
 
 #Entity 2
 menu_frame = CTkFrame(des, width=winaobj.WIDTH, height=winaobj.HEIGHT, bg_color=bg)
@@ -1170,8 +1169,7 @@ update_close_button = CTkButton(update_frame, font=(winaobj.FONT_NAME, winaobj.F
 
 update_hader = CTkLabel(update_frame, font=(winaobj.FONT_NAME, winaobj.FONT_SIZE_STANDART), text=' ', width=winaobj.WIDTH, justify='center', text_color=text, bg_color=bg)
 model_branch = CTkLabel(update_frame, font=(winaobj.FONT_NAME, winaobj.FONT_SIZE_SMALL), text=f'{winaobj.VERSION}', text_color=text, bg_color=bg)
-update_yes_button = CTkButton(update_frame, font=(winaobj.FONT_NAME, winaobj.FONT_SIZE_STANDART_MEDIUM), text=f'{lang.yes}', text_color=text,corner_radius=2, bg_color=bg, fg_color=fg, hover_color=hover, border_color=border, border_width=2, command=lambda: update_start(status_update))
-update_no_button = CTkButton(update_frame, font=(winaobj.FONT_NAME, winaobj.FONT_SIZE_STANDART_MEDIUM), text=f'{lang.no}', text_color=text,corner_radius=2, bg_color=bg, fg_color=fg, hover_color=hover, width=150, border_color=border, border_width=2, command=menu_base)
+update_yes_button = CTkButton(update_frame, font=(winaobj.FONT_NAME, winaobj.FONT_SIZE_STANDART_MEDIUM), text='                                                  Обновить                                                 ', text_color='white',corner_radius=2, bg_color='#006fd6', fg_color='#006fd6', hover_color=hover, border_color='#006fd6', border_width=1, width=45, command=lambda: update_start(status_update))
 
 model_branch.place(x=400, y=320)
 background.place(x=1, y=1)
