@@ -96,6 +96,7 @@ def menu_base():
     donatos_frame.place_forget()
     gsi_frame.place_forget()
     vbmeta_frame.place_forget()
+    changeslist_frame.place_forget()
     update_frame.place_forget()
     adb_sideload_frame.place_forget()
     delete_product_frame.place_forget()
@@ -105,6 +106,9 @@ def menu_base():
 def menu_phone_status():
     menu_frame.place_forget()
     phone_status_frame.place(x=0,y=0)
+def menu_changeslist():
+    menu_frame.place_forget()
+    changeslist_frame.place(x=0,y=0)
 def langswitcher():
     menu_frame.place_forget()
     langswitcher_frame.place(x=0,y=0)
@@ -590,6 +594,10 @@ def update():
     about_menu_frame.place_forget()
     update_frame.place(x=0,y=0)
 
+    update_hader.configure(text=lang.update_check)
+    about_menu_frame.place_forget()
+    changeslist_frame.place_forget()
+    menu_frame.place_forget()
     update_close_button.configure(state='disabled')
     update_yes_button.place_forget()
     des.update()
@@ -839,11 +847,11 @@ about_button.place(x=15,y=420)
 exit_button.place(x=15,y=470)
 
 #Entity 2
-menu_frame = CTkFrame(des, width=winaobj.WIDTH, height=winaobj.HEIGHT, bg_color=bg)
+menu_frame = CTkFrame(des, width=winaobj.WIDTH, height=winaobj.HEIGHT, bg_color=bg, fg_color='#dbdbdb',corner_radius=35)
 
 background = CTkLabel(menu_frame, image=imageload.background, text='')
 
-firmwares_frame = CTkFrame(menu_frame, width=380, height=310, bg_color=bg, fg_color=fg, corner_radius=3, border_color=border, border_width=2)
+firmwares_frame = CTkFrame(menu_frame, width=400, height=320, border_color='#dbdbdb', border_width=2, bg_color=bg, fg_color='#dbdbdb',corner_radius=11)
 
 volume_on_button = CTkButton(firmwares_frame, font=(winaobj.FONT_NAME, winaobj.FONT_SIZE_SMALL), text=lang.volume_on, text_color=text, width=175, image=imageload.volume_on,corner_radius=8, bg_color=bg, fg_color=fg, hover_color=hover, border_color=border, border_width=2, command=lambda: musicplayer.volume_on())
 
@@ -853,7 +861,7 @@ close_button = CTkButton(menu_frame, font=(winaobj.FONT_NAME, winaobj.FONT_SIZE_
 
 location_music_button = CTkButton(firmwares_frame, font=(winaobj.FONT_NAME, winaobj.FONT_SIZE_SMALL), text=lang.location_music, width=360, text_color=text, image=imageload.location_music,corner_radius=8, bg_color=bg, fg_color=fg, hover_color=hover, border_color=border, border_width=2, command=lambda: show_in_file_manager(f'{os.getcwd()}/music/'))
 
-install_firmware_complect_button = CTkButton(firmwares_frame, font=(winaobj.FONT_NAME, winaobj.FONT_SIZE_SMALL), text=lang.install_firmware_complect, width=360, text_color=text, image=imageload.install_firmware_complect,corner_radius=8, bg_color=bg, fg_color=fg, hover_color=hover, border_color=border, border_width=2, command=firmware_complect_installer)
+install_firmware_complect_button = CTkButton(firmwares_frame, font=(winaobj.FONT_NAME, winaobj.FONT_SIZE_SMALL), text=lang.install_firmware_complect, width=355, text_color=text, image=imageload.install_firmware_complect,corner_radius=8, bg_color=bg, fg_color=fg, hover_color=hover, border_color=border, border_width=2, command=firmware_complect_installer)
 
 select_language_button = CTkButton(firmwares_frame, font=(winaobj.FONT_NAME, winaobj.FONT_SIZE_SMALL), text=lang.language, text_color=text, width=175, image=imageload.select_language,corner_radius=8, bg_color=bg, fg_color=fg, hover_color=hover, border_color=border, border_width=2, command=langswitcher)
 
@@ -861,17 +869,21 @@ select_theme_button = CTkButton(firmwares_frame, font=(winaobj.FONT_NAME, winaob
 
 get_music_name_button = CTkButton(firmwares_frame, font=(winaobj.FONT_NAME, winaobj.FONT_SIZE_SMALL), text=lang.get_music_name, width=360, text_color=text, image=imageload.music,corner_radius=8, bg_color=bg, fg_color=fg, hover_color=hover, border_color=border, border_width=2)
 
+logo = CTkLabel(menu_frame, image=imageload.logo, text='')
 
+model_branch = CTkLabel(menu_frame, font=(winaobj.FONT_NAME, winaobj.FONT_SIZE_SMALL), text=f'{winaobj.VERSION}', text_color=text, bg_color=bg)
 
+model_branch.place(x=400, y=110)
+logo.place(x=250, y=5)
 background.place(x=1, y=1)
-firmwares_frame.place(x=285,y=103)
-volume_on_button.place(x=10, y=10)
-volume_off_button.place(x=195, y=10)
+firmwares_frame.place(x=285,y=150)
+volume_on_button.place(x=15, y=10)
+volume_off_button.place(x=205, y=10)
 close_button.place(x=795, y=470)
-location_music_button.place(x=10, y=70)
-install_firmware_complect_button.place(x=10, y=130)
+location_music_button.place(x=15, y=70)
+install_firmware_complect_button.place(x=15, y=130)
 select_language_button.place(x=10, y=190)
-select_theme_button.place(x=195, y=190)
+select_theme_button.place(x=205, y=190)
 get_music_name_button.place(x=10, y=250)
 
 
@@ -1166,14 +1178,16 @@ update_frame = CTkFrame(des, width=winaobj.WIDTH, height=winaobj.HEIGHT, bg_colo
 
 background = CTkLabel(update_frame, image=imageload.background, text='')
 
-logo= CTkLabel(update_frame, image=imageload.logo, text='')
+logo = CTkLabel(update_frame, image=imageload.logo, text='')
 
 update_close_button = CTkButton(update_frame, font=(winaobj.FONT_NAME, winaobj.FONT_SIZE_SMALL), text=lang.close, text_color=text, image=imageload.closes,corner_radius=8, bg_color=bg, fg_color=bg, hover_color=hover, border_color=bg, width=150, border_width=2, command=menu_base)
 
 update_hader = CTkLabel(update_frame, font=(winaobj.FONT_NAME, winaobj.FONT_SIZE_STANDART), text=' ', width=winaobj.WIDTH, justify='center', text_color=text, bg_color=bg)
 model_branch = CTkLabel(update_frame, font=(winaobj.FONT_NAME, winaobj.FONT_SIZE_SMALL), text=f'{winaobj.VERSION}', text_color=text, bg_color=bg)
 update_yes_button = CTkButton(update_frame, font=(winaobj.FONT_NAME, winaobj.FONT_SIZE_STANDART_MEDIUM), text='                                                  Обновить                                                 ', text_color='white',corner_radius=8, bg_color='#006fd6', fg_color='#006fd6', hover_color=hover, border_color='#006fd6', border_width=1, width=45, command=lambda: update_start(status_update))
+updaterslist_button = CTkButton(update_frame, font=(winaobj.FONT_NAME, winaobj.FONT_SIZE_SMALL), text='Список изменений', text_color='gray',corner_radius=8, bg_color='white', fg_color='white', hover_color=hover, border_color='white', width=150, border_width=2, command=menu_changeslist)
 
+updaterslist_button.place(x=400, y=320)
 model_branch.place(x=400, y=320)
 background.place(x=1, y=1)
 logo.place(x=250, y=200)
@@ -1200,6 +1214,8 @@ flash_adb_sideload = CTkButton(adb_sideload_frame, font=(winaobj.FONT_NAME, wina
 sideload_image = CTkLabel(adb_sideload_frame, image=imageload.sideload, text='')
 
 contunue_sideload = CTkButton(adb_sideload_frame, font=(winaobj.FONT_NAME, winaobj.FONT_SIZE_STANDART_MEDIUM), text=f'{lang.l_continue}', image=imageload.right, text_color=text,corner_radius=8, bg_color=bg, fg_color=fg, hover_color=hover, border_color=border, border_width=2, height=50, width=200, command=start_adb_sideload)
+
+
 
 background.place(x=1, y=1)
 close_button.place(x=795, y=470)
@@ -1267,6 +1283,23 @@ if debug_mode == 1:
     gsi_menu_button.configure(state='normal')
     phone_reboot_button.configure(state='normal')
     flash_phone_button.configure(state='normal')
+
+
+#Entity 20 - UpdateList
+changeslist_frame = CTkFrame(des, width=winaobj.WIDTH, height=winaobj.HEIGHT, bg_color=bg)
+
+background = CTkLabel(changeslist_frame, image=imageload.background, text='')
+
+logo = CTkLabel(changeslist_frame, image=imageload.logo, text='')
+model_branch = CTkLabel(changeslist_frame, font=(winaobj.FONT_NAME, winaobj.FONT_SIZE_SMALL), text=f'{winaobj.VERSION}', text_color=text, bg_color=bg)
+update_close_button = CTkButton(changeslist_frame, font=(winaobj.FONT_NAME, winaobj.FONT_SIZE_SMALL), text=lang.close, text_color=text, image=imageload.closes,corner_radius=8, bg_color=bg, fg_color=bg, hover_color=hover, border_color=bg, width=150, border_width=2, command=menu_base)
+model_branch = CTkLabel(changeslist_frame, font=(winaobj.FONT_NAME, winaobj.FONT_SIZE_SMALL), text=f'{winaobj.VERSION}', text_color=text, bg_color=bg)
+changelist = CTkLabel(changeslist_frame, font=(winaobj.FONT_NAME, winaobj.FONT_SIZE_STANDART), text=f'{lang.CHANGELIST}', text_color=text, bg_color=bg)
+model_branch.place(x=400, y=110)
+changelist.place(x=5, y=150)
+logo.place(x=250, y=5)
+background.place(x=1, y=1)
+update_close_button.place(x=1, y=1)
 
 #Startup
 des.mainloop()
