@@ -1087,7 +1087,7 @@ background.place(x=1, y=1)
 langswitcher_hader.place(x=5, y=100)
 close_button.place(x=795, y=470)
 russian_language.place(x=300, y=200)
-english_language.place(x=500, y=202)
+english_language.place(x=500, y=5550)
 
 #Entity 12 - Theme switcher
 themeswitcher_frame = CTkFrame(des, width=winaobj.WIDTH, height=winaobj.HEIGHT, bg_color=bg)
