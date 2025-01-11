@@ -109,6 +109,9 @@ def menu_phone_status():
 def menu_changeslist():
     menu_frame.place_forget()
     changeslist_frame.place(x=0,y=0)
+def menu_WALM():
+    menu_frame.place_forget()
+    WALM_frame.place(x=0,y=0)
 def langswitcher():
     menu_frame.place_forget()
     langswitcher_frame.place(x=0,y=0)
@@ -1014,10 +1017,9 @@ version = CTkLabel(about_menu_frame, font=(winaobj.FONT_NAME, winaobj.FONT_SIZE_
 
 NB = CTkLabel(about_menu_frame, font=(winaobj.FONT_NAME, winaobj.FONT_SIZE_SMALL), text=f'{winaobj.NB}', text_color=text, bg_color=bg1)
 
-core_version = CTkLabel(about_menu_frame, font=(winaobj.FONT_NAME, winaobj.FONT_SIZE_SMALL), text=f'{winaobj.CORE_VERSION}', text_color=text, bg_color=bg1)
-
 NC = CTkLabel(about_menu_frame, font=(winaobj.FONT_NAME, winaobj.FONT_SIZE_SMALL), text=f'{winaobj.NC}', text_color=text, bg_color=bg1)
 
+core_version = CTkButton(about_menu_frame, font=(winaobj.FONT_NAME, winaobj.FONT_SIZE_SMALL), text=f'{winaobj.CORE_VERSION}', text_color=text,corner_radius=8, bg_color=bg1, fg_color=bg1, hover_color=hover, border_color=bg1, width=150, border_width=2, command=menu_WALM)
 
 background.place(x=1, y=1)
 model_branch.place(x=400, y=193)
@@ -1187,7 +1189,7 @@ model_branch = CTkLabel(update_frame, font=(winaobj.FONT_NAME, winaobj.FONT_SIZE
 update_yes_button = CTkButton(update_frame, font=(winaobj.FONT_NAME, winaobj.FONT_SIZE_STANDART_MEDIUM), text='                                                  Обновить                                                 ', text_color='white',corner_radius=8, bg_color='#006fd6', fg_color='#006fd6', hover_color=hover, border_color='#006fd6', border_width=1, width=45, command=lambda: update_start(status_update))
 updaterslist_button = CTkButton(update_frame, font=(winaobj.FONT_NAME, winaobj.FONT_SIZE_SMALL), text='Список изменений', text_color='gray',corner_radius=8, bg_color='white', fg_color='white', hover_color=hover, border_color='white', width=150, border_width=2, command=menu_changeslist)
 
-updaterslist_button.place(x=400, y=320)
+updaterslist_button.place(x=380, y=350)
 model_branch.place(x=400, y=320)
 background.place(x=1, y=1)
 logo.place(x=250, y=200)
@@ -1300,6 +1302,25 @@ changelist.place(x=5, y=150)
 logo.place(x=250, y=5)
 background.place(x=1, y=1)
 update_close_button.place(x=1, y=1)
+
+#Entity 21 - WALM
+WALM_frame = CTkFrame(des, width=winaobj.WIDTH, height=winaobj.HEIGHT)
+
+background = CTkLabel(WALM_frame, image=imageload.background, text='')
+
+logo = CTkLabel(WALM_frame, image=imageload.donat_destination, text='')
+
+logo1 = CTkLabel(WALM_frame, image=imageload.logo, text='')
+Walmfast = CTkLabel(WALM_frame, font=(winaobj.FONT_NAME, winaobj.FONT_SIZE_STANDART), text='Основано на ядре Walmfast', text_color=text, bg_color=bg)
+WALM_close_button = CTkButton(WALM_frame, font=(winaobj.FONT_NAME, winaobj.FONT_SIZE_SMALL), text=lang.close, text_color=text, image=imageload.closes,corner_radius=8, bg_color=bg, fg_color=bg, hover_color=hover, border_color=bg, width=150, border_width=2, command=menu_about)
+
+background.place(x=1,y=1)
+logo.place(x=350, y=150)
+logo1.place(x=250, y=5)
+Walmfast.place(x=250, y=400)
+background.place(x=1,y=1)
+WALM_close_button.place(x=2, y=2)
+
 
 #Startup
 des.mainloop()
