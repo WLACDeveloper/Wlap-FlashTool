@@ -2,12 +2,12 @@ from settings import selector
 
 theme = selector.theme
 
-VERSION = '1.0.5.0 CWTRUXM'
+VERSION = '2.30.01.25 CWTRUXM'
 CORE_VERSION = '07122024.COM'
 BRANCH = 'main'
-WINDOW_SIZE = '960x540'
+WINDOW_SIZE = '960x600'
 WIDTH = 960
-HEIGHT = 540
+HEIGHT = 600
 BACKGROUND = f'image/{theme}/background.png'
 FRAME = f'image/{theme}/frame.png'
 ANDROID = f'image/{theme}/android.jpg'
