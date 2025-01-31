@@ -1,8 +1,8 @@
 from wget import download
-from settings import window_and_objects as winaobj
-from settings import version
+from Userdata import window_and_objects as winaobj
+from Userdata import version
 import os
-import shutil
+import shutil 
 import importlib
 
 
@@ -143,9 +143,9 @@ def update_app(status):
                 os.remove(f'{rootfs}/{file_remove}')
 
         try:
-            download(f'https://raw.githubusercontent.com/WLACDeveloper/Wlap-FlashTool/refs/heads/{update.branch}.zip', f'{rootfs}/walmfast.zip')
+            download(f'https://raw.githubusercontent.com/WLACDeveloper/Wlap-FlashTool/refs/heads/{update.branch}.zip', f'{rootfs}/wftool.zip')
             shutil.unpack_archive(f'{rootfs}/walmfast.zip', f'{rootfs}')
-            os.remove(f'{rootfs}/walmfast.zip')
+            os.remove(f'{rootfs}/wftool.zip')
 
             for file_copy in os.listdir(f'{rootfs}/walmfast-{update.branch}'):
 
