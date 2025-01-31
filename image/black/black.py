@@ -1,8 +1,0 @@
-bg = 'white'
-bg1 = 'white'
-fg = 'white'
-border = 'black'
-text = 'black'
-hover = '#D6EBFF'
-scrollable = 'white'
-scrollbar_fg = 'white'
