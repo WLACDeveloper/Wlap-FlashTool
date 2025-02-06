@@ -2,8 +2,8 @@ from Userdata import selector
 
 theme = selector.theme
 
-VERSION = '2.0.2.0 CWTRUXM'
-CORE_VERSION = '05022025.COM'
+VERSION = '2.0.1.0 CWTEMXM'
+CORE_VERSION = '07122024.COM'
 BRANCH = 'main'
 WINDOW_SIZE = '960x600'
 WIDTH = 960
@@ -65,16 +65,7 @@ RIGHT = f'image/{theme}/right.png'
 WINDOWS_PLATFROM_URL = 'https://dl.google.com/android/repository/platform-tools-latest-windows.zip'
 WINDOWS_PLATFORM_DRIVER = 'https://raw.githubusercontent.com/WALMFAST/walmfast-drivers/refs/heads/main/Driver_Auto_Installer_EXE_v5.1632.00.zip'
 UPDATE = f'image/{theme}/update.png'
-meta_info_update = f'https://raw.githubusercontent.com/WLACDeveloper/WlapToolUpdate/refs/heads/{BRANCH}/update.py'
+meta_info_update = f'https://raw.githubusercontent.com/WLACDeveloper/Wlap-FlashTool-updater/refs/heads/{BRANCH}/update.py'
 null = f'image/{theme}/null.png'
 NB = 'Версия программы:'
 NC = 'Версия Ядра:'
-NBD = 'Дата выхода:'
-NBDR = '06.02.2025'
-CDNM = 'Кодовое Имя:'
-CDNML = 'Black Sky'
-ui = f'image/{theme}/uiupdtd.jpg'
-fx = f'image/{theme}/bugfixupdt.jpg'
-cu = f'image/{theme}/coreupdt.jpg'
-fu = f'image/{theme}/programfuncupdt.jpg'
-ld = f'image/{theme}/ld.png'
