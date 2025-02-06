@@ -15,6 +15,7 @@ import crossfiledialog
 import webbrowser
 import xdialog
 import platform
+import time
 
 if selector.select_languages == 'rus':
     from languages import rus as lang
@@ -113,15 +114,14 @@ def menu_changeslist():
 def menu_WALM():
     menu_frame.place_forget()
     WALM_frame.place(x=0,y=0)
+def menu_start():
+    start_frame.place_forget()
+    start_frame.place(x=0,y=0)
+    
 def langswitcher():
     menu_frame.place_forget()
     langswitcher_frame.place(x=0,y=0)
 def themeswitcher():
-
-    for themepath in os.listdir('image'):
-        themebut = CTkButton(themes_frame, font=(winaobj.FONT_NAME, winaobj.FONT_SIZE_STANDART_MEDIUM), text=themepath, width=360, height=45, text_color=text,corner_radius=8, bg_color=bg, fg_color=fg, hover_color=hover, border_color=border, border_width=2, command=lambda: themeswitch(themepath))
-        themebut.pack()
-
     menu_frame.place_forget()
     themeswitcher_frame.place(x=0,y=0)
 def menu_gsi():
@@ -305,7 +305,7 @@ def load_firmware_folder():
 
     clear_flash() 
 
-    phone_vendor = crossfiledialog.choose_folder(title='Open firmware folder for WALMFAST', start_dir=f'{os.getcwd()}/')
+    phone_vendor = crossfiledialog.choose_folder(title='Open firmware folder for WALMFAST', start_dir=f'{os.getcwd()}')
 
     print('Load flash_all.sh or flash_all.bat')
     if platform.system() == 'Linux':
@@ -328,14 +328,14 @@ def load_firmware_folder():
         print(partitions)
 
         for partition in partitions:
-            flash_object = CTkCheckBox(firmware_partition_frame, text=partition, font=(winaobj.FONT_NAME, winaobj.FONT_SIZE_SMALL), hover_color='grey', corner_radius=8, border_color='white',text_color='white' ,fg_color='black')
+            flash_object = CTkCheckBox(firmware_partition_frame, text=partition, font=(winaobj.FONT_NAME, winaobj.FONT_SIZE_SMALL), hover_color='grey', corner_radius=2, border_color='white',text_color='white' ,fg_color='black')
             flash_object.configure(command=partial(parition_group_check, name=partition, check=flash_object))
             flash_object.pack(anchor=W)  
 
         flash_partitions_radiobutton.pack(anchor=W)
         flash_all_status_check()
     except:
-        xdialog.error('Wlap FlashTool', f'{lang.phone_config_error}')
+        xdialog.error('WALMFast', f'{lang.phone_config_error}')
 
     if platform.system() == 'Windows':
         os.chdir(rootfs)
@@ -789,7 +789,6 @@ background.place(x=0,y=0)
 
 #Entity 1
 base_frame = CTkFrame(des, width=winaobj.WIDTH, height=winaobj.HEIGHT, bg_color='black')
-
 background = CTkLabel(base_frame, image=imageload.background, text='')
 
 frame = CTkLabel(base_frame, image=imageload.frame, text='')
@@ -1028,6 +1027,14 @@ version = CTkLabel(about_menu_frame, font=(winaobj.FONT_NAME, winaobj.FONT_SIZE_
 
 NB = CTkLabel(about_menu_frame, font=(winaobj.FONT_NAME, winaobj.FONT_SIZE_SMALL), text=f'{winaobj.NB}', text_color=text, bg_color=bg1)
 
+NBD = CTkLabel(about_menu_frame, font=(winaobj.FONT_NAME, winaobj.FONT_SIZE_SMALL), text=f'{winaobj.NBD}', text_color=text, bg_color=bg1)
+
+NBDR = CTkLabel(about_menu_frame, font=(winaobj.FONT_NAME, winaobj.FONT_SIZE_SMALL), text=f'{winaobj.NBDR}', text_color=text, bg_color=bg1)
+
+CDNM = CTkLabel(about_menu_frame, font=(winaobj.FONT_NAME, winaobj.FONT_SIZE_SMALL), text=f'{winaobj.CDNM}', text_color=text, bg_color=bg1)
+
+CDNML = CTkLabel(about_menu_frame, font=(winaobj.FONT_NAME, winaobj.FONT_SIZE_SMALL), text=f'{winaobj.CDNML}', text_color=text, bg_color=bg1)
+
 NC = CTkLabel(about_menu_frame, font=(winaobj.FONT_NAME, winaobj.FONT_SIZE_SMALL), text=f'{winaobj.NC}', text_color=text, bg_color=bg1)
 
 core_version = CTkButton(about_menu_frame, font=(winaobj.FONT_NAME, winaobj.FONT_SIZE_SMALL), text=f'{winaobj.CORE_VERSION}', text_color=text,corner_radius=8, bg_color=bg1, fg_color=bg1, hover_color=hover, border_color=bg1, width=150, border_width=2, command=menu_WALM)
@@ -1037,7 +1044,11 @@ model_branch.place(x=400, y=193)
 version.place(x=770, y=300)
 NB.place(x=50, y=300)
 core_version.place(x=770, y=340)
+NBDR.place(x=800, y=380)
 NC.place(x=50, y=340)
+NBD.place(x=50, y=380)
+CDNM.place(x=50, y=420)
+CDNML.place(x=810, y=420)
 made_by.place(x=1000, y=200)
 close_button.place(x=0, y=15)
 update_button.place(x=250, y=50)
@@ -1301,17 +1312,24 @@ if debug_mode == 1:
 
 #Entity 20 - UpdateList
 changeslist_frame = CTkFrame(des, width=winaobj.WIDTH, height=winaobj.HEIGHT, bg_color=bg)
-
 background = CTkLabel(changeslist_frame, image=imageload.background, text='')
+cu = CTkLabel(changeslist_frame, image=imageload.cu, text='')
+
+fx = CTkLabel(changeslist_frame, image=imageload.fx, text='')
+
 
 logo = CTkLabel(changeslist_frame, image=imageload.logo, text='')
 model_branch = CTkLabel(changeslist_frame, font=(winaobj.FONT_NAME, winaobj.FONT_SIZE_SMALL), text=f'{winaobj.VERSION}', text_color=text, bg_color=bg)
 update_close_button = CTkButton(changeslist_frame, font=(winaobj.FONT_NAME, winaobj.FONT_SIZE_SMALL), text=lang.close, text_color=text, image=imageload.closes,corner_radius=8, bg_color=bg, fg_color=bg, hover_color=hover, border_color=bg, width=150, border_width=2, command=menu_base)
 model_branch = CTkLabel(changeslist_frame, font=(winaobj.FONT_NAME, winaobj.FONT_SIZE_SMALL), text=f'{winaobj.VERSION}', text_color=text, bg_color=bg)
 changelist = CTkLabel(changeslist_frame, font=(winaobj.FONT_NAME, winaobj.FONT_SIZE_STANDART), text=f'{lang.CHANGELIST}', text_color=text, bg_color=bg)
+
 model_branch.place(x=400, y=110)
-changelist.place(x=5, y=150)
+changelist.place(x=100, y=150)
 logo.place(x=250, y=5)
+background.place(x=1, y=1)
+cu.place(x=10, y=150)
+fx.place(x=10, y=210)
 background.place(x=1, y=1)
 update_close_button.place(x=1, y=1)
 

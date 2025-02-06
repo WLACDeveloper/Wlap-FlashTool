@@ -47,6 +47,12 @@ update = PhotoImage(file=winaobj.UPDATE)
 sideload = PhotoImage(file=winaobj.SIDELOAD)
 right = PhotoImage(file=winaobj.RIGHT)
 
+ui = PhotoImage(file=winaobj.ui)
+fx = PhotoImage(file=winaobj.fx)
+cu = PhotoImage(file=winaobj.cu)
+fu = PhotoImage(file=winaobj.fu)
+ld = PhotoImage(file=winaobj.ld)
+
 def load_image(image_path):
     image = PhotoImage(file=image_path)
     return image

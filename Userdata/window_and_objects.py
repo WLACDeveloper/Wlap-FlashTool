@@ -2,8 +2,8 @@ from Userdata import selector
 
 theme = selector.theme
 
-VERSION = '2.0.1.0 CWTRUXM'
-CORE_VERSION = '07122024.COM'
+VERSION = '2.0.2.0 CWTRUXM'
+CORE_VERSION = '05022025.COM'
 BRANCH = 'main'
 WINDOW_SIZE = '960x600'
 WIDTH = 960
@@ -69,3 +69,12 @@ meta_info_update = f'https://raw.githubusercontent.com/WLACDeveloper/WlapToolUpd
 null = f'image/{theme}/null.png'
 NB = 'Версия программы:'
 NC = 'Версия Ядра:'
+NBD = 'Дата выхода:'
+NBDR = '06.02.2025'
+CDNM = 'Кодовое Имя:'
+CDNML = 'Black Sky'
+ui = f'image/{theme}/uiupdtd.jpg'
+fx = f'image/{theme}/bugfixupdt.jpg'
+cu = f'image/{theme}/coreupdt.jpg'
+fu = f'image/{theme}/programfuncupdt.jpg'
+ld = f'image/{theme}/ld.png'
