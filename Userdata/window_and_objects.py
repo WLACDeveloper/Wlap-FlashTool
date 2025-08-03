@@ -2,7 +2,7 @@ from Userdata import selector
 
 theme = selector.theme
 
-VERSION = '2.0.2.0 CWTRUXM'
+VERSION = '1.0.0.1 Beta'
 CORE_VERSION = '05022025.COM'
 BRANCH = 'main'
 WINDOW_SIZE = '960x600'
