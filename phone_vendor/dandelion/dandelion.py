@@ -5,7 +5,7 @@ nonofficial_firmwares_forum_forpda = 'https://4pda.to/forum/index.php?showtopic=
 twrp = 'https://4pda.to/forum/index.php?showtopic=1005664&st=18200#entry123178076'
 orangefox = 'https://4pda.to/forum/index.php?showtopic=1005664&st=20640#entry128163562'
 pbrp = 'https://4pda.to/forum/index.php?showtopic=1012866&view=findpost&p=104474033'
-nonuniversalboot = True
+universalboot = 'recovery'
 partitions = ['super.img',
               'recovery.img',
               'boot.img',

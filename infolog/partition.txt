@@ -1,0 +1,3 @@
+Sending 'boot_b' (65536 KB)                        OKAY [  1.628s]
+Writing 'boot_b'                                   FAILED (remote: 'not allowed in locked state')
+fastboot: error: Command failed
