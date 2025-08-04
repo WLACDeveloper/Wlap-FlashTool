@@ -1,2 +1,2 @@
 select_languages =  'rus'
-theme =  'black'
+theme =  'white'

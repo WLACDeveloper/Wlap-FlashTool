@@ -2,9 +2,9 @@ from Userdata import selector
 
 theme = selector.theme
 
-VERSION = '1.0.0.1 Beta'
-CORE_VERSION = '05022025.COM'
-BRANCH = 'main'
+VERSION = '1.0.2.0'
+CORE_VERSION = '04092025.Wlap'
+BRANCH = 'Full'
 WINDOW_SIZE = '960x600'
 WIDTH = 960
 HEIGHT = 600
@@ -67,13 +67,7 @@ WINDOWS_PLATFORM_DRIVER = 'https://raw.githubusercontent.com/WALMFAST/walmfast-d
 UPDATE = f'image/{theme}/update.png'
 meta_info_update = f'https://raw.githubusercontent.com/WLACDeveloper/WlapToolUpdate/refs/heads/{BRANCH}/update.py'
 null = f'image/{theme}/null.png'
-NB = 'Версия программы:'
-NC = 'Версия Ядра:'
-NBD = 'Дата выхода:'
-NBDR = '07.02.2025'
-CDNM = 'Кодовое Имя:'
-CDNML = 'Black Sky'
 ui = f'image/{theme}/uiupdtd.jpg'
-fx = f'image/{theme}/bugfixupdt.jpg'
-cu = f'image/{theme}/coreupdt.jpg'
-fu = f'image/{theme}/programfuncupdt.jpg'
+fixbug = f'image/{theme}/bugfixupdt.jpg'
+core = f'image/{theme}/coreupdt.jpg'
+funct = f'image/{theme}/programfuncupdt.jpg'

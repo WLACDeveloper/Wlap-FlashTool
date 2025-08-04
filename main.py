@@ -114,6 +114,9 @@ def menu_changeslist():
 def menu_WALM():
     menu_frame.place_forget()
     WALM_frame.place(x=0,y=0)
+def menu_Rselect():
+    menu_frame.place_forget()
+    Rselect_frame.place(x=0,y=0)    
 def menu_start():
     start_frame.place_forget()
     start_frame.place(x=0,y=0)
@@ -122,6 +125,13 @@ def langswitcher():
     menu_frame.place_forget()
     langswitcher_frame.place(x=0,y=0)
 def themeswitcher():
+    for themepath in os.listdir('image'):
+        themebut = CTkButton(themes_frame, font=(winaobj.FONT_NAME, winaobj.FONT_SIZE_STANDART_MEDIUM), text=themepath, width=360, height=45, text_color=text,corner_radius=6, bg_color=bg, fg_color=fg, hover_color=hover, border_color=border, border_width=2, command=lambda: themeswitch(themepath))
+        themebut.pack()
+
+    
+    
+    
     menu_frame.place_forget()
     themeswitcher_frame.place(x=0,y=0)
 def menu_gsi():
@@ -343,43 +353,6 @@ def load_firmware_folder():
     des.update()
 def customboot():
     
-    try:
-        if vendorvice.twrp != None or vendorvice.twrp != '':
-            twrp_button.configure(command=lambda: webbrowser.open_new_tab(f'{vendorvice.twrp}'))
-            twrp_button.place(x=195, y=470)
-        else:
-            twrp_button.place_forget()
-    except:
-        twrp_button.place_forget()
-
-    try:
-        if vendorvice.pbrp != None or vendorvice.pbrp != '':
-            pbrp_button.configure(command=lambda: webbrowser.open_new_tab(f'{vendorvice.pbrp}'))
-            pbrp_button.place(x=350, y=470)
-        else:
-            pbrp_button.place_forget()
-    except:
-        pbrp_button.place_forget()
-
-    try:
-        if vendorvice.orangefox != None or vendorvice.orangefox != '':
-            orangefox_button.configure(command=lambda: webbrowser.open_new_tab(f'{vendorvice.orangefox}'))
-            orangefox_button.place(x=20, y=470)
-        else:
-            orangefox_button.place_forget()
-    except:
-        orangefox_button.place_forget()
-
-    try:
-        if vendorvice.nonuniversalboot == True:
-            flashit_partition_attetion.configure(text=lang.flashit_recovery_partition)
-            flashit_partition_attetion.place(x=0, y=10)
-        elif vendorvice.nonuniversalboot == False:
-            flashit_partition_attetion.configure(text=lang.flashit_boot_partition)
-            flashit_partition_attetion.place(x=0, y=10)
-    except:
-        flashit_partition_attetion.place_forget()
-
     recovery_path_textbox.place(x=40, y=250)
     select_recovery_button.place(x=795, y=250)
     menu_frame.place_forget()
@@ -401,6 +374,27 @@ def flash_recovery():
     flash_recovery_process_hader.place(x=50, y=340)
     flash_recovery_button.place_forget()
     close_button.place_forget()
+def rcbf():
+    
+    ad_fas_firm.flash_partition(partition='recovery', file=recovery_image)
+    flash_recovery_process_hader.place_forget()
+    xdialog.info('Wlap FlashTool', f'{lang.score}\n\n{open('infolog/partition.txt', encoding='utf-8').read()}')
+    close_button.place(x=795, y=470)
+    menu_base()
+def bcbf():
+    
+    ad_fas_firm.flash_partition(partition='boot', file=recovery_image)
+    flash_recovery_process_hader.place_forget()
+    xdialog.info('Wlap FlashTool', f'{lang.score}\n\n{open('infolog/partition.txt', encoding='utf-8').read()}')
+    close_button.place(x=795, y=470)
+    menu_base()
+def vbcbf():
+    
+    ad_fas_firm.flash_partition(partition='vendor_boot', file=recovery_image)
+    flash_recovery_process_hader.place_forget()
+    xdialog.info('Wlap FlashTool', f'{lang.score}\n\n{open('infolog/partition.txt', encoding='utf-8').read()}')
+    close_button.place(x=795, y=470)
+    menu_base()
 def start_flash_recovery(reboot):
     global gsi_image
 
@@ -416,31 +410,14 @@ def start_flash_recovery(reboot):
     flash_recovery_process_hader.configure(text=lang.q_start_flash_recovery_process[2])
     des.update()
 
-    if ad_fas_firm.status_unlock() == 'no':
-        xdialog.error('Wlap FlashTool', lang.unlock_bootloader_error)
-        close_button.place(x=795, y=470)
-        flash_recovery_process_hader.place_forget()
-        flash_recovery_button.place(x=530, y=472)
-        menu_base()
-    if ad_fas_firm.status_unlock() == 'yes':
-        flash_recovery_process_hader.configure(text=lang.q_start_flash_recovery_process[3])
-        if vendorvice.nonuniversalboot == False:
-            universal_detect_boot = 'boot'
-        elif vendorvice.nonuniversalboot == True:
-            universal_detect_boot = 'recovery'
-        else:
-            universal_detect_boot = 'boot'
-        if ad_fas_firm.flash_partition(partition=universal_detect_boot, file=recovery_image) == True:
-            flash_recovery_process_hader.place_forget()
-            xdialog.info('Wlap FlashTool', f'{lang.score}\n\n{open('infolog/partition.txt', encoding='utf-8').read()}')
-            close_button.place(x=795, y=470)
-            menu_base()
-        elif ad_fas_firm.flash_partition(partition=universal_detect_boot, file=recovery_image) == False:
-            xdialog.error('Wlap FlashTool', lang.q_start_flash_recovery_process[4])
-            close_button.place(x=795, y=470)
-            flash_recovery_process_hader.place_forget()
-            flash_recovery_button.place(x=530, y=472)
-            menu_base()    
+    
+        
+    ad_fas_firm.flash_partition(partition=rcp, file=recovery_image)
+    flash_recovery_process_hader.place_forget()
+    xdialog.info('Wlap FlashTool', f'{lang.score}\n\n{open('infolog/partition.txt', encoding='utf-8').read()}')
+    close_button.place(x=795, y=470)
+    menu_base()
+         
 def write_language(language):
     with open('Userdata/selector.py', 'r') as f:
         for i in range(0):
@@ -829,7 +806,7 @@ flash_all_radiobutton = CTkRadioButton(firmware_image_frame, text=lang.flash_all
 
 firmware_partition_frame = CTkScrollableFrame(firmware_image_frame, bg_color=bg, fg_color=fg, corner_radius=3, border_color=border, border_width=2, scrollbar_button_color=scrollable, scrollbar_button_hover_color=scrollable, scrollbar_fg_color=scrollbar_fg)
 
-selfold = CTkLabel(base_frame, font=(winaobj.FONT_NAME, winaobj.FONT_SIZE_SMALL), text='Выберите папку', text_color=text, justify='center', width=280, bg_color=bg)
+selfold = CTkLabel(base_frame, font=(winaobj.FONT_NAME, winaobj.FONT_SIZE_SMALL), text=f'{lang.folderSelect}', text_color=text, justify='center', width=280, bg_color=bg)
 
 logoR.place(x=1, y=1)
 background.place(x=1, y=1)
@@ -840,7 +817,7 @@ selfold.place(x=670, y=20)
 android.place(x=330, y=70)
 android_phone_status.place(x=330, y=370)
 phone_vendor_model.place(x=330, y=467)
-select_phone_model_button.place(x=360,y=25)
+select_phone_model_button.place(x=360,y=520)
 test_state_button.place(x=15,y=170)
 gsi_menu_button.place(x=15, y=100)
 firmware_image_frame.place(x=680,y=73)
@@ -856,17 +833,17 @@ menu_frame = CTkFrame(des, width=winaobj.WIDTH, height=winaobj.HEIGHT, bg_color=
 
 background = CTkLabel(menu_frame, image=imageload.background, text='')
 
-firmwares_frame = CTkButton(menu_frame, width=940, height=80, border_color=bg1, border_width=2, bg_color=bg, fg_color=bg1,corner_radius=11, font=(winaobj.FONT_NAME, winaobj.FONT_SIZE_SMALL), text='О программе', image=imageload.update, command=menu_about, hover_color=hover)
+firmwares_frame = CTkButton(menu_frame, width=940, height=80, border_color=bg1, border_width=2, bg_color=bg, fg_color=bg1,corner_radius=11, text_color=text, font=(winaobj.FONT_NAME, winaobj.FONT_SIZE_SMALL), text=f'{lang.aboutpr}', image=imageload.update, command=menu_about, hover_color=hover)
 
-firmwares_frame1 = CTkButton(menu_frame, width=940, height=80, border_color=bg1, border_width=2, bg_color=bg, fg_color=bg1,corner_radius=11, font=(winaobj.FONT_NAME, winaobj.FONT_SIZE_SMALL), text=lang.install_firmware_complect,image=imageload.install_firmware_complect,command=firmware_complect_installer, hover_color=hover)
+firmwares_frame1 = CTkButton(menu_frame, width=940, height=80, border_color=bg1, border_width=2, bg_color=bg, fg_color=bg1,corner_radius=11, text_color=text, font=(winaobj.FONT_NAME, winaobj.FONT_SIZE_SMALL), text=lang.install_firmware_complect,image=imageload.install_firmware_complect,command=firmware_complect_installer, hover_color=hover)
 
-firmwares_frame2 = CTkButton(menu_frame, width=940, height=80, border_color=bg1, border_width=2, bg_color=bg, fg_color=bg1,corner_radius=11, font=(winaobj.FONT_NAME, winaobj.FONT_SIZE_SMALL), text=lang.theme, image=imageload.select_theme, command=themeswitcher, hover_color=hover)
+firmwares_frame2 = CTkButton(menu_frame, width=940, height=80, border_color=bg1, border_width=2, bg_color=bg, fg_color=bg1,corner_radius=11, text_color=text, font=(winaobj.FONT_NAME, winaobj.FONT_SIZE_SMALL), text=lang.theme, image=imageload.select_theme, command=themeswitcher, hover_color=hover)
 
-firmwares_frame3 = CTkButton(menu_frame, width=940, height=80, border_color=bg1, border_width=2, bg_color=bg, fg_color=bg1,corner_radius=11, image=imageload.select_language,command=langswitcher, font=(winaobj.FONT_NAME, winaobj.FONT_SIZE_SMALL), text=lang.choose_language, hover_color=hover)
+firmwares_frame3 = CTkButton(menu_frame, width=940, height=80, border_color=bg1, border_width=2, bg_color=bg, fg_color=bg1,corner_radius=11, text_color=text, image=imageload.select_language,command=langswitcher, font=(winaobj.FONT_NAME, winaobj.FONT_SIZE_SMALL), text=lang.choose_language, hover_color=hover)
 
 firmwares_frame4 = CTkButton(menu_frame, width=940, height=80, border_color=bg1, border_width=2, bg_color=bg, fg_color=bg1,corner_radius=11, font=(winaobj.FONT_NAME, winaobj.FONT_SIZE_SMALL), text=lang.close, text_color=text,image=imageload.close,command=menu_base, hover_color=hover)
 
-firmwares_frame5 = CTkButton(menu_frame, width=940, height=80, border_color=bg1, border_width=2, bg_color=bg, fg_color=bg1,corner_radius=11)
+firmwares_frame5 = CTkButton(menu_frame, width=940, height=80, border_color=bg1, border_width=2, bg_color=bg, fg_color=bg1, text_color=text, corner_radius=11)
 
 volume_on_button = CTkButton(menu_frame, font=(winaobj.FONT_NAME, winaobj.FONT_SIZE_SMALL), text=lang.volume_on, text_color=text, width=175, image=imageload.volume_on,corner_radius=8, bg_color=bg, fg_color=fg, hover_color=hover, border_color=border, border_width=2, command=lambda: musicplayer.volume_on())
 
@@ -880,7 +857,7 @@ install_firmware_complect_button = CTkButton(menu_frame, font=(winaobj.FONT_NAME
 
 select_language_button = CTkButton(menu_frame, font=(winaobj.FONT_NAME, winaobj.FONT_SIZE_SMALL), text=lang.language, text_color=text, width=175, image=imageload.select_language,corner_radius=8, bg_color=bg, fg_color=fg, hover_color=hover, border_color=border, border_width=2, command=langswitcher)
 
-select_theme_button = CTkButton(menu_frame, font=(winaobj.FONT_NAME, winaobj.FONT_SIZE_SMALL), text='О программе', text_color=text, width=175, image=imageload.update,corner_radius=8, bg_color=bg, fg_color=fg, hover_color=hover, border_color=border, border_width=2, command=menu_about)
+select_theme_button = CTkButton(menu_frame, font=(winaobj.FONT_NAME, winaobj.FONT_SIZE_SMALL), text=f'{lang.apps}', text_color=text, width=175, image=imageload.update,corner_radius=8, bg_color=bg, fg_color=fg, hover_color=hover, border_color=border, border_width=2, command=menu_about)
 
 get_music_name_button = CTkButton(menu_frame, font=(winaobj.FONT_NAME, winaobj.FONT_SIZE_SMALL), text=lang.get_music_name, width=360, text_color=text, image=imageload.music,corner_radius=8, bg_color=bg, fg_color=fg, hover_color=hover, border_color=border, border_width=2)
 
@@ -888,7 +865,7 @@ logo = CTkLabel(menu_frame, image=imageload.logo, text='')
 
 model_branch = CTkLabel(menu_frame, font=(winaobj.FONT_NAME, winaobj.FONT_SIZE_SMALL), text=f'{winaobj.VERSION}', text_color=text, bg_color=bg)
 
-model_branch.place(x=400, y=110)
+model_branch.place(x=450, y=110)
 logo.place(x=250, y=5)
 background.place(x=1, y=1)
 firmwares_frame.place(x=10,y=150)
@@ -1025,23 +1002,23 @@ update_button = CTkButton(about_menu_frame, image=imageload.logo, width=370, hei
 
 version = CTkLabel(about_menu_frame, font=(winaobj.FONT_NAME, winaobj.FONT_SIZE_SMALL), text=f'{winaobj.VERSION}', text_color=text, bg_color=bg1)
 
-NB = CTkLabel(about_menu_frame, font=(winaobj.FONT_NAME, winaobj.FONT_SIZE_SMALL), text=f'{winaobj.NB}', text_color=text, bg_color=bg1)
+NB = CTkLabel(about_menu_frame, font=(winaobj.FONT_NAME, winaobj.FONT_SIZE_SMALL), text=f'{lang.numberBuild}', text_color=text, bg_color=bg1)
 
-NBD = CTkLabel(about_menu_frame, font=(winaobj.FONT_NAME, winaobj.FONT_SIZE_SMALL), text=f'{winaobj.NBD}', text_color=text, bg_color=bg1)
+NBD = CTkLabel(about_menu_frame, font=(winaobj.FONT_NAME, winaobj.FONT_SIZE_SMALL), text=f'{lang.BuildDate}', text_color=text, bg_color=bg1)
 
-NBDR = CTkLabel(about_menu_frame, font=(winaobj.FONT_NAME, winaobj.FONT_SIZE_SMALL), text=f'{winaobj.NBDR}', text_color=text, bg_color=bg1)
+NBDR = CTkLabel(about_menu_frame, font=(winaobj.FONT_NAME, winaobj.FONT_SIZE_SMALL), text='04.08.2025', text_color=text, bg_color=bg1)
 
-CDNM = CTkLabel(about_menu_frame, font=(winaobj.FONT_NAME, winaobj.FONT_SIZE_SMALL), text=f'{winaobj.CDNM}', text_color=text, bg_color=bg1)
+CDNM = CTkLabel(about_menu_frame, font=(winaobj.FONT_NAME, winaobj.FONT_SIZE_SMALL), text=f'{lang.codename}', text_color=text, bg_color=bg1)
 
-CDNML = CTkLabel(about_menu_frame, font=(winaobj.FONT_NAME, winaobj.FONT_SIZE_SMALL), text=f'{winaobj.CDNML}', text_color=text, bg_color=bg1)
+CDNML = CTkLabel(about_menu_frame, font=(winaobj.FONT_NAME, winaobj.FONT_SIZE_SMALL), text='Black Sky', text_color=text, bg_color=bg1)
 
-NC = CTkLabel(about_menu_frame, font=(winaobj.FONT_NAME, winaobj.FONT_SIZE_SMALL), text=f'{winaobj.NC}', text_color=text, bg_color=bg1)
+NC = CTkLabel(about_menu_frame, font=(winaobj.FONT_NAME, winaobj.FONT_SIZE_SMALL), text=f'{lang.CoreNumber}', text_color=text, bg_color=bg1)
 
 core_version = CTkButton(about_menu_frame, font=(winaobj.FONT_NAME, winaobj.FONT_SIZE_SMALL), text=f'{winaobj.CORE_VERSION}', text_color=text,corner_radius=8, bg_color=bg1, fg_color=bg1, hover_color=hover, border_color=bg1, width=150, border_width=2, command=menu_WALM)
 
 background.place(x=1, y=1)
-model_branch.place(x=400, y=193)
-version.place(x=770, y=300)
+model_branch.place(x=450, y=193)
+version.place(x=850, y=300)
 NB.place(x=50, y=300)
 core_version.place(x=770, y=340)
 NBDR.place(x=800, y=380)
@@ -1069,7 +1046,7 @@ twrp_button = CTkButton(customboot_frame, font=(winaobj.FONT_NAME, winaobj.FONT_
 orangefox_button = CTkButton(customboot_frame, font=(winaobj.FONT_NAME, winaobj.FONT_SIZE_SMALL), text=f'{lang.orangefox}', text_color=text, image=imageload.orangefox,corner_radius=8, bg_color=bg, fg_color=fg, hover_color=hover, border_color=border, border_width=2, command=menu_base)
 pbrp_button = CTkButton(customboot_frame, font=(winaobj.FONT_NAME, winaobj.FONT_SIZE_SMALL), text=f'{lang.pbrp}', text_color=text, image=imageload.pbrp,corner_radius=8, bg_color=bg, fg_color=fg, hover_color=hover, border_color=border, border_width=2, command=menu_base)
 
-flash_recovery_button = CTkButton(customboot_frame, font=(winaobj.FONT_NAME, winaobj.FONT_SIZE_SMALL), text=f'{lang.flash_recovery}', text_color=text, image=imageload.flash,corner_radius=8, bg_color=bg, fg_color=fg, hover_color=hover, border_color=border, border_width=2, command=flash_recovery)
+flash_recovery_button = CTkButton(customboot_frame, font=(winaobj.FONT_NAME, winaobj.FONT_SIZE_SMALL), text=f'{lang.flash_recovery}', text_color=text, image=imageload.flash,corner_radius=8, bg_color=bg, fg_color=fg, hover_color=hover, border_color=border, border_width=2, command=menu_Rselect)
 
 recovery_path_textbox = CTkLabel(customboot_frame, font=(winaobj.FONT_NAME, winaobj.FONT_SIZE_STANDART), text='', text_color=text, bg_color=bg, justify='center', width=750, wraplength=750)
 
@@ -1085,25 +1062,6 @@ flashit_partition_attetion = CTkLabel(customboot_frame, font=(winaobj.FONT_NAME,
 background.place(x=1, y=1)
 customboot_hader.place(x=40, y=30)
 customboot_descryption.place(x=40, y=120)
-close_button.place(x=795, y=470)
-
-#Entity 10 - Задонать пж
-donatos_frame = CTkFrame(des, width=winaobj.WIDTH, height=winaobj.HEIGHT, bg_color=bg)
-
-background = CTkLabel(donatos_frame, image=imageload.background, text='')
-
-donatos_destination = CTkLabel(donatos_frame, image=imageload.donat_destination, text='')
-
-donatos_me = CTkLabel(donatos_frame, font=(winaobj.FONT_NAME, winaobj.FONT_SIZE_STANDART), text=f'{lang.program_name}', text_color=text, bg_color=bg)
-
-destination_and_number_card = CTkLabel(donatos_frame, font=(winaobj.FONT_NAME, winaobj.FONT_SIZE_STANDART), text=f'{lang.donat_me}\n{lang.donat_destination}\n{lang.card_number}', text_color=text, bg_color=bg, justify = LEFT)
-
-close_button = CTkButton(donatos_frame, font=(winaobj.FONT_NAME, winaobj.FONT_SIZE_SMALL), text=lang.close, text_color=text, image=imageload.close,corner_radius=8, bg_color=bg, fg_color=fg, hover_color=hover, border_color=border, width=150, border_width=2, command=menu_base)
-
-background.place(x=1, y=1)
-donatos_destination.place(x=120, y=115)
-donatos_me.place(x=400, y=100)
-destination_and_number_card.place(x=400, y=150)
 close_button.place(x=795, y=470)
 
 #Entity 11 - Language switcher
@@ -1123,7 +1081,7 @@ background.place(x=1, y=1)
 langswitcher_hader.place(x=5, y=100)
 close_button.place(x=795, y=470)
 russian_language.place(x=300, y=200)
-english_language.place(x=500, y=5550)
+english_language.place(x=500, y=200)
 
 #Entity 12 - Theme switcher
 themeswitcher_frame = CTkFrame(des, width=winaobj.WIDTH, height=winaobj.HEIGHT, bg_color=bg)
@@ -1208,11 +1166,11 @@ update_close_button = CTkButton(update_frame, font=(winaobj.FONT_NAME, winaobj.F
 
 update_hader = CTkLabel(update_frame, font=(winaobj.FONT_NAME, winaobj.FONT_SIZE_STANDART), text=' ', width=winaobj.WIDTH, justify='center', text_color=text, bg_color=bg)
 model_branch = CTkLabel(update_frame, font=(winaobj.FONT_NAME, winaobj.FONT_SIZE_SMALL), text=f'{winaobj.VERSION}', text_color=text, bg_color=bg)
-update_yes_button = CTkButton(update_frame, font=(winaobj.FONT_NAME, winaobj.FONT_SIZE_STANDART_MEDIUM), text='                                                  Обновить                                                 ', text_color=text,corner_radius=15, bg_color='#006fd6', fg_color='#006fd6', hover_color=hover, border_color='#006fd6', width=45, border_width=8, command=lambda: update_start(status_update))
-updaterslist_button = CTkButton(update_frame, font=(winaobj.FONT_NAME, winaobj.FONT_SIZE_SMALL), text='Список изменений', text_color=text,corner_radius=8, bg_color=bg, fg_color=fg, hover_color=hover, border_color=bg, width=150, border_width=2, command=menu_changeslist)
+update_yes_button = CTkButton(update_frame, font=(winaobj.FONT_NAME, winaobj.FONT_SIZE_STANDART_MEDIUM), text=f'{lang.updatebutt}', text_color=text,corner_radius=15, bg_color='#006fd6', fg_color='#006fd6', hover_color=hover, border_color='#006fd6', width=45, border_width=8, command=lambda: update_start(status_update))
+updaterslist_button = CTkButton(update_frame, font=(winaobj.FONT_NAME, winaobj.FONT_SIZE_SMALL), text=f'{lang.changelist}', text_color=text,corner_radius=8, bg_color=bg, fg_color=fg, hover_color=hover, border_color=bg, width=150, border_width=2, command=menu_changeslist)
 
 updaterslist_button.place(x=380, y=350)
-model_branch.place(x=400, y=320)
+model_branch.place(x=450, y=320)
 background.place(x=1, y=1)
 logo.place(x=250, y=200)
 update_close_button.place(x=1, y=1)
@@ -1313,9 +1271,6 @@ if debug_mode == 1:
 #Entity 20 - UpdateList
 changeslist_frame = CTkFrame(des, width=winaobj.WIDTH, height=winaobj.HEIGHT, bg_color=bg)
 background = CTkLabel(changeslist_frame, image=imageload.background, text='')
-cu = CTkLabel(changeslist_frame, image=imageload.cu, text='')
-
-fx = CTkLabel(changeslist_frame, image=imageload.fx, text='')
 
 
 logo = CTkLabel(changeslist_frame, image=imageload.logo, text='')
@@ -1324,12 +1279,10 @@ update_close_button = CTkButton(changeslist_frame, font=(winaobj.FONT_NAME, wina
 model_branch = CTkLabel(changeslist_frame, font=(winaobj.FONT_NAME, winaobj.FONT_SIZE_SMALL), text=f'{winaobj.VERSION}', text_color=text, bg_color=bg)
 changelist = CTkLabel(changeslist_frame, font=(winaobj.FONT_NAME, winaobj.FONT_SIZE_STANDART), text=f'{lang.CHANGELIST}', text_color=text, bg_color=bg)
 
-model_branch.place(x=400, y=110)
+model_branch.place(x=450, y=110)
 changelist.place(x=100, y=150)
 logo.place(x=250, y=5)
 background.place(x=1, y=1)
-cu.place(x=10, y=150)
-fx.place(x=10, y=210)
 background.place(x=1, y=1)
 update_close_button.place(x=1, y=1)
 
@@ -1341,7 +1294,7 @@ background = CTkLabel(WALM_frame, image=imageload.background, text='')
 logo = CTkLabel(WALM_frame, image=imageload.donat_destination, text='')
 
 logo1 = CTkLabel(WALM_frame, image=imageload.logo, text='')
-Walmfast = CTkLabel(WALM_frame, font=(winaobj.FONT_NAME, winaobj.FONT_SIZE_STANDART), text='Основано на ядре Walmfast', text_color=text, bg_color=bg)
+Walmfast = CTkLabel(WALM_frame, font=(winaobj.FONT_NAME, winaobj.FONT_SIZE_STANDART), text=f'{lang.buildwalm}', text_color=text, bg_color=bg)
 WALM_close_button = CTkButton(WALM_frame, font=(winaobj.FONT_NAME, winaobj.FONT_SIZE_SMALL), text=lang.close, text_color=text, image=imageload.closes,corner_radius=8, bg_color=bg, fg_color=bg, hover_color=hover, border_color=bg, width=150, border_width=2, command=menu_about)
 
 background.place(x=1,y=1)
@@ -1351,6 +1304,24 @@ Walmfast.place(x=250, y=400)
 background.place(x=1,y=1)
 WALM_close_button.place(x=2, y=2)
 
+#Entity 22 - RSelect
+Rselect_frame = CTkFrame(des, width=winaobj.WIDTH, height=winaobj.HEIGHT)
 
+background = CTkLabel(Rselect_frame, image=imageload.background, text='')
+
+rcb = CTkButton(Rselect_frame, font=(winaobj.FONT_NAME, winaobj.FONT_SIZE_STANDART_MEDIUM), text='Recovery', text_color=text, corner_radius=8, bg_color=bg, fg_color=bg, hover_color=hover, border_color=border, width=180, border_width=2, command=rcbf)
+bcb = CTkButton(Rselect_frame, font=(winaobj.FONT_NAME, winaobj.FONT_SIZE_STANDART_MEDIUM), text='Boot', text_color=text, corner_radius=8, bg_color=bg, fg_color=bg, hover_color=hover, border_color=border, width=180, border_width=2, command=bcbf)
+vbcb = CTkButton(Rselect_frame, font=(winaobj.FONT_NAME, winaobj.FONT_SIZE_STANDART_MEDIUM), text='Vendor_boot', text_color=text,corner_radius=8, bg_color=bg, fg_color=bg, hover_color=hover, border_color=border, width=180, border_width=2, command=vbcbf)
+ccc = CTkButton(Rselect_frame, font=(winaobj.FONT_NAME, winaobj.FONT_SIZE_SMALL), text=lang.close, text_color=text, image=imageload.closes,corner_radius=8, bg_color=bg, fg_color=bg, hover_color=hover, border_color=border, width=150, border_width=2, command=menu_base)
+srp = CTkLabel(Rselect_frame, font=(winaobj.FONT_NAME, winaobj.FONT_SIZE_STANDART_MEDIUM), text=f'{lang.SelectRecoveryPart}', text_color=text, bg_color=bg)
+
+
+
+background.place(x=1,y=1)
+srp.place(x=100,y=180)
+rcb.place(x=390,y=240)
+bcb.place(x=390,y=320)
+vbcb.place(x=390,y=400)
+ccc.place(x=1, y=1)
 #Startup
 des.mainloop()

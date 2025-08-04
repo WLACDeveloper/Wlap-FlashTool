@@ -1,2 +1,2 @@
-version = float(2.00)
-patch = 3
+version = float(1.00)
+patch = 2
