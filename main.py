@@ -353,47 +353,6 @@ def load_firmware_folder():
     des.update()
 def customboot():
     
-    try:
-        if vendorvice.twrp != None or vendorvice.twrp != '':
-            twrp_button.configure(command=lambda: webbrowser.open_new_tab(f'{vendorvice.twrp}'))
-            twrp_button.place(x=195, y=470)
-        else:
-            twrp_button.place_forget()
-    except:
-        twrp_button.place_forget()
-
-    try:
-        if vendorvice.pbrp != None or vendorvice.pbrp != '':
-            pbrp_button.configure(command=lambda: webbrowser.open_new_tab(f'{vendorvice.pbrp}'))
-            pbrp_button.place(x=350, y=470)
-        else:
-            pbrp_button.place_forget()
-    except:
-        pbrp_button.place_forget()
-
-    try:
-        if vendorvice.orangefox != None or vendorvice.orangefox != '':
-            orangefox_button.configure(command=lambda: webbrowser.open_new_tab(f'{vendorvice.orangefox}'))
-            orangefox_button.place(x=20, y=470)
-        else:
-            orangefox_button.place_forget()
-    except:
-        orangefox_button.place_forget()
-
-    try:
-        if vendorvice.universalboot == boot:
-            flashit_partition_attetion.configure(text=lang.flashit_boot_partition)
-            flashit_partition_attetion.place(x=0, y=10)
-        elif vendorvice.universalboot == recovery:
-            flashit_partition_attetion.configure(text=lang.flashit_recovery_partition)
-            flashit_partition_attetion.place(x=0, y=10)
-        elif vendorvice.universalboot == vendor_boot:
-            flashit_partition_attetion.configure(text=lang.flashit_vendor_boot_partition)
-            flashit_partition_attetion.place(x=0, y=10)
-       
-    except:
-        flashit_partition_attetion.place_forget()
-
     recovery_path_textbox.place(x=40, y=250)
     select_recovery_button.place(x=795, y=250)
     menu_frame.place_forget()
@@ -1047,7 +1006,7 @@ NB = CTkLabel(about_menu_frame, font=(winaobj.FONT_NAME, winaobj.FONT_SIZE_SMALL
 
 NBD = CTkLabel(about_menu_frame, font=(winaobj.FONT_NAME, winaobj.FONT_SIZE_SMALL), text=f'{lang.BuildDate}', text_color=text, bg_color=bg1)
 
-NBDR = CTkLabel(about_menu_frame, font=(winaobj.FONT_NAME, winaobj.FONT_SIZE_SMALL), text='03.08.2025', text_color=text, bg_color=bg1)
+NBDR = CTkLabel(about_menu_frame, font=(winaobj.FONT_NAME, winaobj.FONT_SIZE_SMALL), text='04.08.2025', text_color=text, bg_color=bg1)
 
 CDNM = CTkLabel(about_menu_frame, font=(winaobj.FONT_NAME, winaobj.FONT_SIZE_SMALL), text=f'{lang.codename}', text_color=text, bg_color=bg1)
 
@@ -1103,25 +1062,6 @@ flashit_partition_attetion = CTkLabel(customboot_frame, font=(winaobj.FONT_NAME,
 background.place(x=1, y=1)
 customboot_hader.place(x=40, y=30)
 customboot_descryption.place(x=40, y=120)
-close_button.place(x=795, y=470)
-
-#Entity 10 - Задонать пж
-donatos_frame = CTkFrame(des, width=winaobj.WIDTH, height=winaobj.HEIGHT, bg_color=bg)
-
-background = CTkLabel(donatos_frame, image=imageload.background, text='')
-
-donatos_destination = CTkLabel(donatos_frame, image=imageload.donat_destination, text='')
-
-donatos_me = CTkLabel(donatos_frame, font=(winaobj.FONT_NAME, winaobj.FONT_SIZE_STANDART), text=f'{lang.program_name}', text_color=text, bg_color=bg)
-
-destination_and_number_card = CTkLabel(donatos_frame, font=(winaobj.FONT_NAME, winaobj.FONT_SIZE_STANDART), text=f'{lang.donat_me}\n{lang.donat_destination}\n{lang.card_number}', text_color=text, bg_color=bg, justify = LEFT)
-
-close_button = CTkButton(donatos_frame, font=(winaobj.FONT_NAME, winaobj.FONT_SIZE_SMALL), text=lang.close, text_color=text, image=imageload.close,corner_radius=8, bg_color=bg, fg_color=fg, hover_color=hover, border_color=border, width=150, border_width=2, command=menu_base)
-
-background.place(x=1, y=1)
-donatos_destination.place(x=120, y=115)
-donatos_me.place(x=400, y=100)
-destination_and_number_card.place(x=400, y=150)
 close_button.place(x=795, y=470)
 
 #Entity 11 - Language switcher

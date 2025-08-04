@@ -2,8 +2,8 @@ from Userdata import selector
 
 theme = selector.theme
 
-VERSION = '1.0.1.0'
-CORE_VERSION = '03092025.Wlap'
+VERSION = '1.0.2.0'
+CORE_VERSION = '04092025.Wlap'
 BRANCH = 'Full'
 WINDOW_SIZE = '960x600'
 WIDTH = 960
